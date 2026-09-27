@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React Artifact</title>
+  <style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mono{font-family:JetBrains Mono,ui-monospace,Menlo,Monaco,Consolas,monospace}.perspective{perspective:1200px}.preserve-3d{transform-style:preserve-3d}.backface-hidden{backface-visibility:hidden}.rotate-y-180{transform:rotateY(180deg)}.flip{transform:rotateY(180deg)}.scrollbar-none::-webkit-scrollbar{display:none}.scrollbar-none{-ms-overflow-style:none;scrollbar-width:none}</style>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@600;800&display=swap');
+  body{font-family:Syne,ui-sans-serif,system-ui;background:#08080a;color:#fff}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="importmap">{"imports":{"react":"https://esm.sh/react@18.2.0","react-dom":"https://esm.sh/react-dom@18.2.0","react-dom/client":"https://esm.sh/react-dom@18.2.0/client"}}</script>
+  <script type="module">
+import React, { useState, useMemo } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const days = [
+  {
+    n: 1,
+    theme: "Fundamentos · Yo y mi entorno",
+    words: [
+      { en: "I", es: "yo", phonetic: "[ai]", cat: "BASE", absurd: "Ves una letra I gigante tatuada en tu pecho. Tú eres la I. I = yo, literal.", exWork: "I need the server access today.", exBase: "I have a new perfume." },
+      { en: "you", es: "tú / usted", phonetic: "[yu]", cat: "BASE", absurd: "Te señalan a YOU con láser morado. Tú eres YOU. Todos te apuntan.", exWork: "Can you fix this bug?", exBase: "Do you like this scent?" },
+      { en: "want", es: "querer", phonetic: "[uont]", cat: "BASE", absurd: "Un fantasma WANT dice '¡UONT!' mientras quiere robar tu perfume. Suena a llanto.", exWork: "I want to deploy this today.", exBase: "I want more stock." },
+      { en: "need", es: "necesitar", phonetic: "[nid]", cat: "BASE", absurd: "Un nido (NID) vacío en tu escritorio. El servidor hace 'need need' porque NECESITA huevos de código.", exWork: "We need a backup now.", exBase: "I need a bottle for the sample." },
+      { en: "have", es: "tener", phonetic: "[jav]", cat: "BASE", absurd: "Un JAVón con manos. Tiene TODO. 'I HAVE' grita mientras agarra frascos.", exWork: "I have the error report.", exBase: "Do you have this in stock?" },
+      { en: "server", es: "servidor", phonetic: "[sérver]", cat: "IT", absurd: "Un mesero (SERVER) con bandeja de servidores físicos sirviendo a tu laptop como si fuera restaurante.", exWork: "The server is down, we need to fix it.", exBase: "The server stores all our orders." },
+      { en: "bug", es: "error de código", phonetic: "[bag]", cat: "IT", absurd: "Un insecto BUG gigante con lentes programando mal y riendo. Lo aplastas con un teclado.", exWork: "I found a bug in the login.", exBase: "This bug blocks the delivery system." },
+      { en: "scent", es: "aroma", phonetic: "[sent]", cat: "PERFUMES", absurd: "Un CENTavo que huele increíble. Lo hueles y dices 'qué SCENT!' y suena moneda cayendo.", exWork: "This scent is our best seller.", exBase: "I love the scent of this bottle." },
+      { en: "bottle", es: "frasco / botella", phonetic: "[bótol]", cat: "PERFUMES", absurd: "Una BOTa peleando con una botella de perfume. La bota patea la bottle y explota en aroma.", exWork: "We need 20 bottles for this batch.", exBase: "This bottle is very elegant." },
+      { en: "stock", es: "inventario", phonetic: "[stok]", cat: "PERFUMES", absurd: "Un STOK de maíz apilado pero cada mazorca es un perfume. Bodega infinita de AION.", exWork: "Do we have this fragrance in stock?", exBase: "Low stock alert for sweet notes." },
+      { en: "sample", es: "muestra", phonetic: "[sámpol]", cat: "PERFUMES", absurd: "Un SAM con ampolleta repartiendo SAMPLES en el metro. Sam = Sample man.", exWork: "Can I send you a sample?", exBase: "This sample smells fresh and soft." },
+    ]
+  },
+  {
+    n: 2,
+    theme: "Conexión · Equipo y Cliente",
+    words: [
+      { en: "we", es: "nosotros", phonetic: "[ui]", cat: "BASE", absurd: "WE suena como 'hui'. Tú y tu equipo huyendo juntos de un bug gigante. WE = juntos.", exWork: "We need to update the system.", exBase: "We sell premium fragrances." },
+      { en: "they", es: "ellos", phonetic: "[dei]", cat: "BASE", absurd: "THEY = DE ELLOS. Imagina a THEY con capa diciendo 'DEI DEI DEI' como villanos.", exWork: "They have a problem with the network.", exBase: "They want to buy more bottles." },
+      { en: "like", es: "gustar / como", phonetic: "[laik]", cat: "BASE", absurd: "Un LIKE de Facebook gigante hecho de perfume. Lo tocas y huele rico.", exWork: "Clients like this fresh scent.", exBase: "I like your brand." },
+      { en: "know", es: "saber / conocer", phonetic: "[nou]", cat: "BASE", absurd: "KNOW con K muda fantasma. Sabes que está pero NO se ve.", exWork: "I know how to fix this error.", exBase: "Do you know the supplier?" },
+      { en: "help", es: "ayudar", phonetic: "[jelp]", cat: "BASE", absurd: "Gritas HELP y llega un técnico con capa morada de AION rescatándote.", exWork: "Can you help me with the database?", exBase: "Can you help with this order?" },
+      { en: "deploy", es: "desplegar / lanzar", phonetic: "[di-plói]", cat: "IT", absurd: "Tu jefe hace DEPLOY de perfumes desde un paracaídas sobre el servidor.", exWork: "We need to deploy the fix today.", exBase: "We will deploy the new update tonight." },
+      { en: "fix", es: "arreglar / reparar", phonetic: "[fiks]", cat: "IT", absurd: "FIX = pegamento mágico. Arreglas el server pegándolo con una etiqueta de perfume.", exWork: "I can fix the login issue now.", exBase: "We fixed the stock problem." },
+      { en: "fragrance", es: "fragancia", phonetic: "[fréigrans]", cat: "PERFUMES", absurd: "Un FRAGgle Rock gigante que es una fragancia caminando.", exWork: "What fragrance do you recommend?", exBase: "This fragrance has sweet notes." },
+      { en: "order", es: "pedido / orden", phonetic: "[órder]", cat: "PERFUMES", absurd: "Un general gritando ORDER! y todos ordenan perfumes militarmente.", exWork: "I have a new order for 50 bottles.", exBase: "Can I place an order today?" },
+      { en: "price", es: "precio", phonetic: "[prais]", cat: "PERFUMES", absurd: "Un PRICE tag gigante que dice 'PRAISE' alabando tu perfume.", exWork: "What is the price list for this batch?", exBase: "The price is very good." },
+      { en: "delivery", es: "entrega", phonetic: "[delíveri]", cat: "PERFUMES", absurd: "Un DELIVERY boy en moto que deja rastro de aroma morado por toda CDMX.", exWork: "The delivery will arrive today.", exBase: "Free delivery for best sellers." },
+    ]
+  },
+  {
+    n: 3,
+    theme: "Acción · Crear y Mover",
+    words: [
+      { en: "go", es: "ir", phonetic: "[gou]", cat: "BASE", absurd: "Un GO-kart hecho de frascos de perfume acelerando. GO = acelerar e ir.", exWork: "We need to go to the meeting now.", exBase: "Let's go to the store." },
+      { en: "come", es: "venir", phonetic: "[kam]", cat: "BASE", absurd: "Alguien COME con boca enorme comiéndose la palabra COME.", exWork: "Can you come to the server room?", exBase: "Come and smell this scent." },
+      { en: "make", es: "hacer / crear", phonetic: "[meik]", cat: "BASE", absurd: "MAKE con maquillaje. Te maquillas y CREAS una nueva cara.", exWork: "We need to make a backup.", exBase: "We make our own fragrances." },
+      { en: "get", es: "obtener / conseguir", phonetic: "[guet]", cat: "BASE", absurd: "Un GET de baloncesto, agarras todo. GET = atrapar.", exWork: "I need to get access to the database.", exBase: "Can I get a sample?" },
+      { en: "work", es: "trabajar / trabajo", phonetic: "[uork]", cat: "BASE", absurd: "Un WORKer con casco hecho de teclados trabajando en perfume.", exWork: "Does the system work now?", exBase: "Our perfumes work very well." },
+      { en: "database", es: "base de datos", phonetic: "[déitabeis]", cat: "IT", absurd: "Una base gigante con DATOS flotando como burbujas de perfume.", exWork: "The database is down.", exBase: "Our orders are in the database." },
+      { en: "backup", es: "respaldo", phonetic: "[bákap]", cat: "IT", absurd: "Un BACK con mochila gigante (UP) llevando copias de tu server a la espalda.", exWork: "We need a backup before deploy.", exBase: "Backup of all clients." },
+      { en: "brand", es: "marca", phonetic: "[brand]", cat: "PERFUMES", absurd: "Una BRAND de hierro caliente marcando AION en un frasco.", exWork: "Our brand is AION.", exBase: "This brand smells premium." },
+      { en: "supplier", es: "proveedor", phonetic: "[sapláier]", cat: "PERFUMES", absurd: "Un SUPPLIER suplando aire (supply) para inflar botellas.", exWork: "We need a new supplier for bottles.", exBase: "Our supplier has sweet notes." },
+      { en: "client", es: "cliente", phonetic: "[kláient]", cat: "PERFUMES", absurd: "Un CLIENTe gigante con ojos de perfume esperando su pedido.", exWork: "The client has an issue with login.", exBase: "Our client loves fresh scents." },
+      { en: "sell", es: "vender", phonetic: "[sel]", cat: "PERFUMES", absurd: "Una celda (CELL) vendiendo perfumes desde prisión.", exWork: "We sell this fragrance online.", exBase: "We sell 20 bottles a day." },
+    ]
+  },
+  {
+    n: 4,
+    theme: "Permiso y Tiempo",
+    words: [
+      { en: "can", es: "poder", phonetic: "[kan]", cat: "BASE", absurd: "Una lata CAN que puede con todo, abre la lata y sale poder.", exWork: "Can you check the network?", exBase: "Can you send the sample?" },
+      { en: "will", es: "haré / va a", phonetic: "[uil]", cat: "BASE", absurd: "WILL = Voluntad con rueda. Futuro rodando.", exWork: "I will fix it today.", exBase: "This will be our best seller." },
+      { en: "today", es: "hoy", phonetic: "[tudéi]", cat: "BASE", absurd: "TO DAY: Este DÍA (DAY) con TO de hacia, hoy es TO-DAY.", exWork: "Deploy is today.", exBase: "Delivery today." },
+      { en: "now", es: "ahora", phonetic: "[nau]", cat: "BASE", absurd: "NOW suena como ¡ÑAU! Gato que quiere ahora.", exWork: "We need it now.", exBase: "I need stock now." },
+      { en: "here", es: "aquí", phonetic: "[jir]", cat: "BASE", absurd: "HERE suena como OIR, aquí se oye el perfume.", exWork: "The file is here.", exBase: "The scent is here." },
+      { en: "network", es: "red / red de internet", phonetic: "[nétuork]", cat: "IT", absurd: "Una NET de pesca atrapando WORKers, red de trabajo.", exWork: "Network issue in the server.", exBase: "Network of clients." },
+      { en: "password", es: "contraseña", phonetic: "[pásuord]", cat: "IT", absurd: "Una palabra que PASA sobre una puerta WORD gigante.", exWork: "Reset your password please.", exBase: "Password for the store system." },
+      { en: "login", es: "iniciar sesión", phonetic: "[lógin]", cat: "IT", absurd: "Un LOG de madera haciendo IN dentro del server.", exWork: "Login failed, bug in system.", exBase: "Login to see stock." },
+      { en: "error", es: "error", phonetic: "[éror]", cat: "IT", absurd: "Un ERROR escrito con luces rojas parpadeando en tu monitor.", exWork: "We have an error in database.", exBase: "Error in the order." },
+      { en: "notes", es: "notas olfativas", phonetic: "[nouts]", cat: "PERFUMES", absurd: "NOTAS musicales que huelen, cada nota es un aroma.", exWork: "What are the notes?", exBase: "Sweet and fresh notes." },
+      { en: "sweet", es: "dulce", phonetic: "[suit]", cat: "PERFUMES", absurd: "Un SUIT (traje) de azúcar derritiéndose dulce.", exWork: "Clients like sweet fragrances.", exBase: "This is very sweet." },
+    ]
+  },
+  {
+    n: 5,
+    theme: "Descripción y Problema",
+    words: [
+      { en: "more", es: "más", phonetic: "[mor]", cat: "BASE", absurd: "MORE = AMOR sin A, más amor = MORE perfume.", exWork: "We need more time.", exBase: "More stock please." },
+      { en: "very", es: "muy", phonetic: "[véri]", cat: "BASE", absurd: "VERY suena a VER con Y, muy muy.", exWork: "Very important ticket.", exBase: "Very fresh scent." },
+      { en: "good", es: "bueno", phonetic: "[gud]", cat: "BASE", absurd: "GOOD = Dios con G, bueno como Dios.", exWork: "Good fix!", exBase: "Good fragrance." },
+      { en: "problem", es: "problema", phonetic: "[próblem]", cat: "BASE", absurd: "Un PRO con BLEMA (flema) problematico.", exWork: "We have a problem with server.", exBase: "Problem with delivery." },
+      { en: "time", es: "tiempo", phonetic: "[taim]", cat: "BASE", absurd: "Un TIMER gigante corriendo.", exWork: "We need time to fix.", exBase: "Delivery time." },
+      { en: "update", es: "actualizar", phonetic: "[apdéit]", cat: "IT", absurd: "UP DATE, una cita hacia arriba actualizada.", exWork: "Update the system now.", exBase: "Update the price list." },
+      { en: "access", es: "acceso", phonetic: "[ákses]", cat: "IT", absurd: "Un AXE (hacha) cortando un CESO para dar acceso.", exWork: "I need access to the cloud.", exBase: "Access to the store." },
+      { en: "report", es: "reporte / informe", phonetic: "[ripórt]", cat: "IT", absurd: "Un RE-PORTero llevando reportes al puerto.", exWork: "Send me the error report.", exBase: "Daily sales report." },
+      { en: "fresh", es: "fresco", phonetic: "[fresh]", cat: "PERFUMES", absurd: "FRESH con hielo cayendo sobre el perfume.", exWork: "Fresh install of system.", exBase: "This scent is very fresh." },
+      { en: "strong", es: "fuerte", phonetic: "[strong]", cat: "PERFUMES", absurd: "STRONG man cargando un frasco gigante.", exWork: "Strong password needed.", exBase: "Strong fragrance." },
+      { en: "soft", es: "suave", phonetic: "[soft]", cat: "PERFUMES", absurd: "SOFT como almohada de algodón de aroma.", exWork: "Soft launch of the system.", exBase: "Soft and sweet scent." },
+    ]
+  },
+  {
+    n: 6,
+    theme: "Flujo de Trabajo",
+    words: [
+      { en: "people", es: "gente / personas", phonetic: "[pípol]", cat: "BASE", absurd: "PEOPLE comiendo PIPOL (people) de maíz, gente comiendo.", exWork: "People have access issues.", exBase: "People love this brand." },
+      { en: "use", es: "usar", phonetic: "[yus]", cat: "BASE", absurd: "USE suena como YUZ (jugo) que usas para todo.", exWork: "Use the backup server.", exBase: "Use this sample." },
+      { en: "send", es: "enviar", phonetic: "[send]", cat: "BASE", absurd: "SEND con antena enviando perfume por señal.", exWork: "Send me the file.", exBase: "Send the delivery today." },
+      { en: "try", es: "intentar / probar", phonetic: "[trai]", cat: "BASE", absurd: "TRY = TRI intento, 3 intentos.", exWork: "Try to fix the bug.", exBase: "Try this fragrance." },
+      { en: "think", es: "pensar", phonetic: "[zink]", cat: "BASE", absurd: "THINK con tanque de pensamientos.", exWork: "I think the server is down.", exBase: "Think about the new scent." },
+      { en: "system", es: "sistema", phonetic: "[sístem]", cat: "IT", absurd: "SYSTEM con SIS y TEMA, sistema de temas.", exWork: "The system is updated.", exBase: "System for orders." },
+      { en: "file", es: "archivo", phonetic: "[fail]", cat: "IT", absurd: "Un FILEte de carne que es un archivo.", exWork: "Send the file via cloud.", exBase: "File with prices." },
+      { en: "cloud", es: "nube", phonetic: "[klaud]", cat: "IT", absurd: "Una CLOUD que es nube con cables de server.", exWork: "Backup in the cloud.", exBase: "Cloud for stock." },
+      { en: "ticket", es: "ticket / folio", phonetic: "[tíket]", cat: "IT", absurd: "Un TICKET que pica como garrapata (tick) y es ticket.", exWork: "I have a ticket for support.", exBase: "Ticket for order." },
+      { en: "store", es: "tienda", phonetic: "[stor]", cat: "PERFUMES", absurd: "STORE con cosas almacenadas, tienda almacén.", exWork: "Store the backup.", exBase: "Our store in CDMX." },
+      { en: "buy", es: "comprar", phonetic: "[bai]", cat: "PERFUMES", absurd: "BUY con BYE, compras y te vas.", exWork: "Client wants to buy.", exBase: "Buy more bottles." },
+    ]
+  },
+  {
+    n: 7,
+    theme: "Cierre y Fluidez",
+    words: [
+      { en: "please", es: "por favor", phonetic: "[plis]", cat: "BASE", absurd: "PLEASE con PLIS de porfis, pidiendo por favor con carita.", exWork: "Please send access.", exBase: "Please send sample." },
+      { en: "sorry", es: "perdón / lo siento", phonetic: "[sóri]", cat: "BASE", absurd: "SORRY con SORRI de sonrisa triste pidiendo perdón.", exWork: "Sorry, server was down.", exBase: "Sorry, out of stock." },
+      { en: "thank you", es: "gracias", phonetic: "[zenk yu]", cat: "BASE", absurd: "THANK con tanque dando gracias.", exWork: "Thank you for support.", exBase: "Thank you for your order." },
+      { en: "understand", es: "entender", phonetic: "[anderstánd]", cat: "BASE", absurd: "UNDER STAND debajo de un stand entendiendo.", exWork: "I understand the bug now.", exBase: "Do you understand the price?" },
+      { en: "speak", es: "hablar", phonetic: "[spik]", cat: "BASE", absurd: "SPEAK con pico de pájaro que habla.", exWork: "Can we speak about ticket?", exBase: "Speak about fragrance." },
+      { en: "support", es: "soporte", phonetic: "[supórt]", cat: "IT", absurd: "SUPER PORTero dando soporte.", exWork: "Contact support please.", exBase: "Support for clients." },
+      { en: "meeting", es: "reunión", phonetic: "[míting]", cat: "IT", absurd: "MEETING con ME y EATING comiendo en reunión.", exWork: "Meeting about deploy.", exBase: "Meeting with supplier." },
+      { en: "batch", es: "lote", phonetic: "[bach]", cat: "PERFUMES", absurd: "BATCH de bachas de perfume, lote de bachas.", exWork: "Batch for backup.", exBase: "New batch of AION." },
+      { en: "price list", es: "lista de precios", phonetic: "[prais list]", cat: "PERFUMES", absurd: "LISTa de PRICE tags bailando.", exWork: "Send price list.", exBase: "Price list for fragrances." },
+      { en: "best seller", es: "más vendido", phonetic: "[best séler]", cat: "PERFUMES", absurd: "BEST SELLER con medalla de mejor vendedor.", exWork: "Best seller system.", exBase: "This scent is best seller." },
+      { en: "client", es: "cliente (formal)", phonetic: "[kláient]", cat: "PERFUMES", absurd: "CLIENT con CLI de clic, cliente que hace clic y compra.", exWork: "Client needs access.", exBase: "Our best client." },
+    ]
+  }
+];
+
+const catMeta = {
+  BASE: { label: "BASE 80/20", dot: "bg-sky-400", ring: "ring-sky-500/30", text: "text-sky-200" },
+  IT: { label: "SISTEMAS IT", dot: "bg-emerald-400", ring: "ring-emerald-500/30", text: "text-emerald-200" },
+  PERFUMES: { label: "AION PERFUMES", dot: "bg-amber-400", ring: "ring-amber-500/30", text: "text-amber-200" },
+};
+
+function Flashcard({ w }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div className="perspective">
+      <div
+        onClick={() => setFlipped(!flipped)}
+        className={`relative w-full min-h-[220px] cursor-pointer preserve-3d transition-transform duration-700 ${flipped? "rotate-y-180" : ""} rounded-[18px] border border-white/10 bg-[#111116] hover:border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.4)]`}
+      >
+        <div className="absolute inset-0 backface-hidden p-5 flex flex-col justify-between rounded-[18px]">
+          <div className="flex justify-between items-start">
+            <span className={`mono text-[10px] tracking-widest px-2.5 py-1 rounded-full border bg-black/40 ${catMeta[w.cat].text} border-white/10`}>{catMeta[w.cat].label}</span>
+            <span className="mono text-[11px] text-zinc-500">{w.phonetic}</span>
+          </div>
+          <div>
+            <div className="text-[32px] font-black tracking-tight leading-none">{w.en}</div>
+            <div className="mt-2 mono text-[11px] text-zinc-400">Toca para memorizar · técnica absurda</div>
+          </div>
+          <div className="flex items-center gap-2 mono text-[10px] text-zinc-500">
+            <div className={`w-1.5 h-1.5 rounded-full ${catMeta[w.cat].dot}`} /> {w.cat} · IF12
+          </div>
+        </div>
+        <div className="absolute inset-0 backface-hidden rotate-y-180 p-5 flex flex-col justify-between rounded-[18px] bg-[#15151c] border border-white/10">
+          <div>
+            <div className="flex justify-between">
+              <div className="text-[13px] font-bold text-zinc-200">{w.es}</div>
+              <div className="mono text-[10px] text-zinc-500">{w.en}</div>
+            </div>
+            <div className="mt-3 rounded-xl bg-black/40 border border-white/[0.06] p-3">
+              <div className="mono text-[9px] tracking-widest text-violet-300 mb-1">IMAGEN ABSURDA · MEMORIA</div>
+              <div className="text-[12px] leading-[1.45] text-zinc-200">{w.absurd}</div>
+            </div>
+            <div className="mt-3 space-y-2">
+              <div className="text-[11px] leading-[1.4]"><span className="mono text-[9px] text-emerald-300">IT:</span> <span className="text-zinc-300">{w.exWork}</span></div>
+              <div className="text-[11px] leading-[1.4]"><span className="mono text-[9px] text-amber-300">AION:</span> <span className="text-zinc-300">{w.exBase}</span></div>
+            </div>
+          </div>
+          <div className="mono text-[10px] text-zinc-500">Toca para volver · Di al revés para retener</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [activeDay, setActiveDay] = useState(1);
+  const [completed, setCompleted] = useState(new Set());
+  const day = useMemo(() => days.find(d => d.n === activeDay), [activeDay]);
+  const grouped = useMemo(() => {
+    const g = { BASE: [], IT: [], PERFUMES: [] };
+    day.words.forEach(w => g[w.cat].push(w));
+    return g;
+  }, [day]);
+
+  const toggleComplete = () => {
+    const n = new Set(completed);
+    if (n.has(activeDay)) n.delete(activeDay); else n.add(activeDay);
+    setCompleted(n);
+  };
+
+  const progress = (completed.size / 7) * 100;
+
+  return (
+    <div className="min-h-screen bg-[#08080a] selection:bg-violet-500/30">
+      <div className="sticky top-0 z-30 backdrop-blur-xl bg-[#08080a]/80 border-b border-white/[0.06]">
+        <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-[12px] bg-white text-black grid place-items-center font-black text-[13px] tracking-tighter">IF12</div>
+            <div>
+              <div className="text-[13px] tracking-[0.22em] font-black">PROTOCOLO HOLLYWOOD IF12 // SISTEMAS x AION</div>
+              <div className="mono text-[11px] text-zinc-500 -mt-0.5">77 palabras · 7 días · 30 min/día · Edición CDMX</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-[180px]">
+              <div className="flex justify-between mono text-[10px] text-zinc-500 mb-1.5"><span>PROGRESO</span><span>{Math.round(progress)}%</span></div>
+              <div className="h-1.5 rounded-full bg-white/10 overflow-hidden"><div className="h-full bg-white transition-all" style={{width: `${progress}%`}} /></div>
+            </div>
+            <div className="hidden md:flex items-center gap-2 mono text-[10px] text-zinc-400"><div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />{completed.size}/7 días</div>
+          </div>
+        </div>
+        <div className="mx-auto max-w-[1280px] px-6 md:px-8 pb-4 flex gap-2 overflow-x-auto scrollbar-none">
+          {days.map(d => (
+            <button key={d.n} onClick={() => setActiveDay(d.n)} className={`shrink-0 px-4 py-2.5 rounded-full border mono text-[12px] font-bold tracking-wide transition-all ${activeDay===d.n? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]" : completed.has(d.n)? "bg-emerald-500/15 text-emerald-200 border-emerald-500/30" : "bg-white/[0.04] text-zinc-400 border-white/10 hover:bg-white/[0.08]"}`}>DÍA {d.n} {completed.has(d.n)? "✓" : ""}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-8">
+        <div className="rounded-[28px] bg-gradient-to-br from-[#14141a] to-[#0c0c10] border border-white/[0.08] p-6 md:p-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <div className="mono text-[11px] tracking-[0.2em] text-violet-300">DÍA {day.n} · {day.theme.toUpperCase()}</div>
+            <h1 className="mt-2 text-[30px] md:text-[42px] font-black leading-[0.9] tracking-tight">
+              {day.n === 1 && "Yo quiero tener aroma y servidor."}
+              {day.n === 2 && "Nosotros ayudamos a vender fragancia."}
+              {day.n === 3 && "Vamos a hacer respaldo del cliente."}
+              {day.n === 4 && "Puedo dar acceso aquí y ahora."}
+              {day.n === 5 && "Muy buen problema con reporte fresco."}
+              {day.n === 6 && "La gente usa nube para comprar tienda."}
+              {day.n === 7 && "Por favor entiende el lote más vendido."}
+            </h1>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="px-3 py-1 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-200 text-xs">BASE 5 palabras</span>
+              <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-200 text-xs">IT 3 palabras</span>
+              <span className="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs">AION 3 palabras</span>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <div className="rounded-2xl bg-black/40 border border-white/10 px-5 py-4 min-w-[140px]">
+              <div className="mono text-[10px] text-zinc-500">PALABRAS HOY</div>
+              <div className="text-3xl font-black">11</div>
+              <div className="text-[11px] text-zinc-400">5 + 3 + 3 = IF12 split</div>
+            </div>
+            <div className="rounded-2xl bg-black/40 border border-white/10 px-5 py-4 min-w-[140px]">
+              <div className="mono text-[10px] text-zinc-500">ESTADO</div>
+              <div className="text-lg font-bold">{completed.has(day.n)? "✓ Completado" : "○ En progreso"}</div>
+              <div className="text-[11px] text-zinc-400">Toca las cards para memorizar</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 space-y-10">
+          {(Object.keys(grouped)).map(cat => (
+            <div key={cat}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`w-2 h-2 rounded-full ${catMeta[cat].dot} shadow-[0_0_10px_currentColor]`} />
+                <h2 className="mono text-[12px] tracking-[0.18em] font-bold">{catMeta[cat].label} · {grouped[cat].length}</h2>
+                <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent ml-2" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                {grouped[cat].map(w => (
+                  <Flashcard key={w.en + day.n} w={w} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 rounded-[24px] bg-[#0f0f14] border border-white/10 p-6 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <div className="mono text-[11px] tracking-widest text-zinc-500">RUTINA IF12 · 30 MINUTOS</div>
+              <h3 className="text-[22px] font-black tracking-tight mt-1">Sin gramática. Solo imagen + sonido + voz.</h3>
+            </div>
+            <div className="mono text-[11px] text-zinc-400">Método: Memoria → Percepción → Speaking</div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { t: "10' MEMORIA", d: "Ver frente, crear imagen absurda, decir al revés (ES→EN). No escribas.", c: "from-violet-600/20 to-zinc-900", icon: "🧠" },
+              { t: "10' PERCEPCIÓN", d: "Escucha la palabra sin traducir. Solo reconoce el sonido. Repite fonética.", c: "from-fuchsia-600/20 to-zinc-900", icon: "👂" },
+              { t: "10' SPEAKING", d: "Di la frase IT/AION en voz alta sin traducir palabra por palabra. Flujo > perfección.", c: "from-amber-500/20 to-zinc-900", icon: "🎙️" },
+            ].map(b => (
+              <div key={b.t} className={`rounded-2xl bg-gradient-to-br ${b.c} border border-white/10 p-5`}>
+                <div className="text-[11px] mono tracking-widest font-bold flex items-center gap-2"><span className="text-lg">{b.icon}</span>{b.t}</div>
+                <div className="mt-3 text-[13px] leading-[1.5] text-zinc-300">{b.d}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
+            <div className="mono text-[11px] text-zinc-500">Tip AION: Usa las frases en tu WhatsApp de clientes + ticket de soporte hoy.</div>
+            <button
+              onClick={toggleComplete}
+              className={`px-6 py-3 rounded-full font-bold text-[13px] tracking-wide transition-all border ${completed.has(activeDay)? "bg-emerald-500 text-black border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.5)]" : "bg-white text-black border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"}`}
+            >
+              {completed.has(activeDay)? "✓ DÍA COMPLETADO · Desmarcar" : `MARCAR DÍA ${activeDay} COMO COMPLETADO`}
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-10 mb-16 rounded-[20px] bg-gradient-to-br from-zinc-900 to-black border border-white/[0.06] p-6">
+          <div className="mono text-[11px] tracking-widest text-zinc-500">PROTOCOLO ANTI-BLOQUEO IF12</div>
+          <div className="mt-4 grid md:grid-cols-3 gap-3">
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="text-[12px] font-bold text-white">Error 1: Gramática antes que vocabulario</div>
+              <div className="mt-1 text-[12px] text-zinc-400 leading-[1.5]">→ Primero palabras. Las 77 palabras son tu sistema operativo. Sin vocab, no hay deploy.</div>
+            </div>
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="text-[12px] font-bold text-white">Error 4: No retener</div>
+              <div className="mt-1 text-[12px] text-zinc-400 leading-[1.5]">→ Usa imagen absurda. Cuanto más ridícula (server sirviendo perfumes), más se queda.</div>
+            </div>
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="text-[12px] font-bold text-white">Error 5: Percepción</div>
+              <div className="mt-1 text-[12px] text-zinc-400 leading-[1.5]">→ Escucha sin traducir. Reconoce sonido como reconoces 'AION' sin deletrear.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+  </script>
+</body>
+</html>

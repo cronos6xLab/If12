@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Panel de Accesos FoodBot</title>
+<title>Panel de Accesos FoodBot · Modo iFrame</title>
 <style>
   :root{
     --bg:#0f1218;
@@ -14,6 +14,8 @@
     --muted:#8b96a8;
     --accent:#22c55e;
     --accent-2:#16a34a;
+    --warn:#f59e0b;
+    --danger:#ef4444;
     --shadow:0 10px 30px rgba(0,0,0,.45);
   }
   *{box-sizing:border-box}
@@ -25,7 +27,7 @@
     min-height:100vh;
     padding:32px 24px 120px;
   }
-  header{
+  header.main{
     max-width:1100px;margin:0 auto 28px;
     display:flex;align-items:center;gap:14px;flex-wrap:wrap;
   }
@@ -36,8 +38,9 @@
     font-weight:800;font-size:20px;color:#0b1017;
     box-shadow:0 6px 18px rgba(34,197,94,.35);
   }
-  header h1{font-size:22px;margin:0;letter-spacing:.3px}
-  header p{margin:2px 0 0;color:var(--muted);font-size:13px}
+  header.main h1{font-size:22px;margin:0;letter-spacing:.3px}
+  header.main p{margin:2px 0 0;color:var(--muted);font-size:13px}
+  header.main p b{color:var(--txt)}
 
   .grid{
     max-width:1100px;margin:0 auto;
@@ -54,6 +57,7 @@
     transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
     text-decoration:none;color:inherit;
     position:relative;overflow:hidden;
+    font-family:inherit;text-align:left;
   }
   .card::after{
     content:"";position:absolute;inset:0;
@@ -72,9 +76,9 @@
   .card h3{margin:0;font-size:15px;line-height:1.3}
   .card small{color:var(--muted);font-size:12px;word-break:break-all}
 
-  /* ============ BOTÓN FLOTANTE ============ */
+  /* ============ FAB ============ */
   .fab-wrap{
-    position:fixed;right:24px;bottom:24px;z-index:99999;
+    position:fixed;right:24px;bottom:24px;z-index:999999;
     display:flex;flex-direction:column;align-items:flex-end;gap:12px;
   }
   .fab-menu{
@@ -85,21 +89,14 @@
     transition:all .28s cubic-bezier(.22,1,.36,1);
     width:280px;
   }
-  .fab-wrap.open .fab-menu{
-    max-height:70vh;opacity:1;pointer-events:auto;transform:translateY(0) scale(1);
-  }
+  .fab-wrap.open .fab-menu{max-height:70vh;opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
   .fab-menu-scroll{
-    background:rgba(22,27,36,.97);
-    backdrop-filter:blur(14px);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:8px;
-    box-shadow:var(--shadow);
-    max-height:60vh;overflow-y:auto;
+    background:rgba(22,27,36,.97);backdrop-filter:blur(14px);
+    border:1px solid var(--line);border-radius:16px;padding:8px;
+    box-shadow:var(--shadow);max-height:60vh;overflow-y:auto;
   }
   .fab-menu-scroll::-webkit-scrollbar{width:8px}
-  .fab-menu-scroll::-webkit-scrollbar-thumb{background:#33405500;border-radius:8px}
-  .fab-menu-scroll:hover::-webkit-scrollbar-thumb{background:#334055}
+  .fab-menu-scroll::-webkit-scrollbar-thumb{background:#334055;border-radius:8px}
   .fab-item{
     display:flex;align-items:center;gap:10px;
     padding:10px 12px;border-radius:10px;
@@ -128,8 +125,7 @@
   .fab-wrap.open .fab-btn{
     transform:rotate(135deg);
     background:linear-gradient(135deg,#ef4444,#b91c1c);
-    box-shadow:0 10px 26px rgba(239,68,68,.45);
-    color:#fff;
+    box-shadow:0 10px 26px rgba(239,68,68,.45);color:#fff;
   }
   .fab-title{
     font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
@@ -138,80 +134,76 @@
 
   /* ============ MODAL CON IFRAME ============ */
   .modal{
-    position:fixed;inset:0;z-index:9998;
-    display:none;
-    background:rgba(7,10,15,.75);
-    backdrop-filter:blur(6px);
+    position:fixed;inset:0;z-index:999998;display:none;
+    background:rgba(7,10,15,.78);backdrop-filter:blur(6px);
     padding:24px;
   }
   .modal.open{display:flex}
   .modal-shell{
-    flex:1;
-    background:#0f141c;
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    box-shadow:var(--shadow);
-    max-width:100%;
+    flex:1;background:#0f141c;border:1px solid var(--line);
+    border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:var(--shadow);max-width:100%;
   }
   .modal-bar{
     display:flex;align-items:center;gap:10px;
-    padding:12px 14px;
-    background:#161b24;
-    border-bottom:1px solid var(--line);
-    flex-wrap:wrap;
+    padding:12px 14px;background:#161b24;border-bottom:1px solid var(--line);
+    flex-wrap:wrap;flex:0 0 auto;
   }
-  .modal-bar .dot-live{
+  .dot-live{
     width:9px;height:9px;border-radius:50%;
-    background:var(--accent);box-shadow:0 0 10px rgba(34,197,94,.9);
-    flex:0 0 auto;
+    background:var(--accent);box-shadow:0 0 10px rgba(34,197,94,.9);flex:0 0 auto;
   }
+  .dot-live.warn{background:var(--warn);box-shadow:0 0 10px rgba(245,158,11,.9)}
+  .dot-live.err{background:var(--danger);box-shadow:0 0 10px rgba(239,68,68,.9)}
   .modal-title{
-    font-size:14px;font-weight:600;
-    flex:1;min-width:120px;
+    font-size:14px;font-weight:600;flex:1;min-width:120px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
   .modal-url{
-    font-size:11.5px;color:var(--muted);
-    background:#0e141d;border:1px solid var(--line);
-    padding:5px 10px;border-radius:8px;
+    font-size:11.5px;color:var(--muted);background:#0e141d;
+    border:1px solid var(--line);padding:5px 10px;border-radius:8px;
     max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
   .mbtn{
-    border:1px solid var(--line);
-    background:#0e141d;color:var(--txt);
-    padding:8px 12px;border-radius:9px;
-    font-size:12.5px;font-weight:600;cursor:pointer;
+    border:1px solid var(--line);background:#0e141d;color:var(--txt);
+    padding:8px 12px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;
     display:inline-flex;align-items:center;gap:6px;
     transition:background .15s ease,border-color .15s ease,transform .15s ease;
-    text-decoration:none;
-    font-family:inherit;
+    text-decoration:none;font-family:inherit;
   }
   .mbtn:hover{background:#1f2734;border-color:#3a475c}
   .mbtn:active{transform:scale(.97)}
-  .mbtn.danger:hover{background:#3a1212;border-color:#7f1d1d;color:#fecaca}
-  .mbtn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#08130c;border:none}
+  .mbtn.primary{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#08130c;border:none;
+  }
   .mbtn.primary:hover{filter:brightness(1.08)}
-  .modal-body{flex:1;position:relative;background:#fff}
-  .modal-body iframe{
-    width:100%;height:100%;border:0;display:block;
+  .mbtn.danger:hover{background:#3a1212;border-color:#7f1d1d;color:#fecaca}
+  .modal-body{flex:1;position:relative;background:#fff;min-height:0}
+
+  #modalFrame{
+    width:100%;height:100%;border:0;display:block;background:#fff;
   }
-  .modal-hint{
-    position:absolute;left:50%;bottom:16px;transform:translateX(-50%);
-    background:rgba(15,20,28,.92);
-    border:1px solid var(--line);
-    color:var(--muted);
-    padding:8px 14px;border-radius:10px;
-    font-size:12px;
-    display:flex;align-items:center;gap:8px;
-    pointer-events:none;
-    opacity:0;transition:opacity .3s ease;
-    z-index:5;
+
+  /* Capa de detección / fallback */
+  .frame-state{
+    position:absolute;inset:0;background:#0f141c;
+    display:flex;align-items:center;justify-content:center;
+    padding:32px;z-index:5;
+    flex-direction:column;text-align:center;gap:16px;
+    transition:opacity .3s ease;
   }
-  .modal-hint.show{opacity:1}
-  .modal-hint b{color:var(--txt)}
+  .frame-state.hide{opacity:0;pointer-events:none}
+  .frame-state .spinner{
+    width:44px;height:44px;border-radius:50%;
+    border:3px solid #232b39;border-top-color:var(--accent);
+    animation:spin .9s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .frame-state h2{margin:0;font-size:17px}
+  .frame-state p{margin:0;color:var(--muted);font-size:13.5px;max-width:520px;line-height:1.5}
+  .frame-state .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .frame-state .ico-warn{font-size:38px;line-height:1}
 
   @media (max-width:720px){
     .modal{padding:8px}
@@ -224,12 +216,11 @@
     .fab-menu{width:calc(100vw - 32px)}
   }
 
-  /* Toast */
   .toast{
     position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
     background:#1c222d;border:1px solid var(--line);
     padding:10px 16px;border-radius:10px;font-size:13px;
-    opacity:0;pointer-events:none;transition:all .25s ease;z-index:100000;
+    opacity:0;pointer-events:none;transition:all .25s ease;z-index:1000000;
     box-shadow:var(--shadow);
   }
   .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -237,37 +228,47 @@
 </head>
 <body>
 
-<header>
+<header class="main">
   <div class="logo">FB</div>
   <div>
     <h1>Panel de Accesos · FoodBot Admin</h1>
-    <p>Haz clic en cualquier tarjeta o en el botón flotante. Las páginas se abren aquí mismo sin perder el control.</p>
+    <p>Modo <b>iframe forzado</b>: intenta incrustar cada módulo dentro de este panel. Si el sitio lo bloquea, verás una opción de respaldo.</p>
   </div>
 </header>
 
 <main class="grid" id="grid"></main>
 
-<!-- ============ MODAL CON IFRAME ============ -->
+<!-- ============ MODAL CON IFRAME FORZADO ============ -->
 <div class="modal" id="modal">
   <div class="modal-shell">
     <div class="modal-bar">
-      <span class="dot-live"></span>
+      <span class="dot-live" id="statusDot"></span>
       <span class="modal-title" id="modalTitle">—</span>
-      <span class="modal-url" id="modalUrl">—</span>
+      <span class="modal-url"  id="modalUrl">—</span>
       <button class="mbtn" id="btnReload" title="Recargar">↻ <span class="lbl">Recargar</span></button>
-      <a class="mbtn primary" id="btnNewTab" href="#" target="_blank" rel="noopener noreferrer" title="Abrir en nueva pestaña">↗ <span class="lbl">Nueva pestaña</span></a>
+      <button class="mbtn" id="btnWindow" title="Abrir en ventana emergente (mantiene sesión)">🪟 <span class="lbl">Ventana</span></button>
       <button class="mbtn danger" id="btnClose" title="Cerrar">✕ <span class="lbl">Cerrar</span></button>
     </div>
     <div class="modal-body">
-      <iframe id="modalFrame" referrerpolicy="no-referrer"></iframe>
-      <div class="modal-hint" id="modalHint">Si la página aparece en blanco, usa <b>Nueva pestaña</b></div>
+      <iframe
+        id="modalFrame"
+        name="fb_frame"
+        title="Contenido FoodBot"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-top-navigation-by-user-activation allow-storage-access-by-user-activation allow-presentation"
+        allow="clipboard-read; clipboard-write; fullscreen; storage-access; geolocation"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+
+      <div class="frame-state" id="frameState">
+        <!-- Contenido inyectado dinámicamente -->
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ============ BOTÓN FLOTANTE ============ -->
+<!-- ============ FAB ============ -->
 <div class="fab-wrap" id="fabWrap">
-  <div class="fab-menu" id="fabMenu">
+  <div class="fab-menu">
     <div class="fab-menu-scroll">
       <div class="fab-title">Accesos rápidos</div>
       <div id="fabList"></div>
@@ -281,76 +282,219 @@
 <script>
 /* ================== CONFIGURACIÓN DE ACCESOS ================== */
 const ACCESOS = [
-  { titulo:"Fullfil a requisición",                    url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"📦" },
-  { titulo:"Validar auditorías pendientes",            url:"https://admin.foodbot.ai/inventory/audit?tab=pending",      icono:"✅" },
-  { titulo:"Calendario de requisiciones y compras",    url:"https://admin.foodbot.ai/inventory/po-calendar",            icono:"📅" },
-  { titulo:"Configuración y creación de productos",    url:"https://admin.foodbot.ai/menu/product",                     icono:"🍔" },
-  { titulo:"Configuración y creación de usuarios",     url:"https://admin.foodbot.ai/restaurant_details/manage_users",  icono:"👥" },
-  { titulo:"Configuración y creación de menús visibles",url:"https://admin.foodbot.ai/menu?tab=menu",                   icono:"📋" },
-  { titulo:"Disponibilidad de productos en ubicaciones",url:"https://admin.foodbot.ai/menu/menu-availability",          icono:"📍" },
-  { titulo:"Recetas",                                  url:"https://admin.foodbot.ai/inventory/recipes",                icono:"📖" },
-  { titulo:"Modificadores",                            url:"https://admin.foodbot.ai/menu/modifierCategory",            icono:"🧩" },
-  { titulo:"Órdenes de traslado y compras",            url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"🔄" },
+  { titulo:"Fullfil a requisición",                     url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"📦" },
+  { titulo:"Validar auditorías pendientes",             url:"https://admin.foodbot.ai/inventory/audit?tab=pending",      icono:"✅" },
+  { titulo:"Calendario de requisiciones y compras",     url:"https://admin.foodbot.ai/inventory/po-calendar",            icono:"📅" },
+  { titulo:"Configuración y creación de productos",     url:"https://admin.foodbot.ai/menu/product",                     icono:"🍔" },
+  { titulo:"Configuración y creación de usuarios",      url:"https://admin.foodbot.ai/restaurant_details/manage_users",  icono:"👥" },
+  { titulo:"Configuración y creación de menús visibles",url:"https://admin.foodbot.ai/menu?tab=menu",                    icono:"📋" },
+  { titulo:"Disponibilidad de productos en ubicaciones",url:"https://admin.foodbot.ai/menu/menu-availability",           icono:"📍" },
+  { titulo:"Recetas",                                   url:"https://admin.foodbot.ai/inventory/recipes",                icono:"📖" },
+  { titulo:"Modificadores",                             url:"https://admin.foodbot.ai/menu/modifierCategory",            icono:"🧩" },
+  { titulo:"Órdenes de traslado y compras",             url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"🔄" },
 ];
 
 /* ================== REFERENCIAS ================== */
-const modal       = document.getElementById('modal');
-const modalTitle  = document.getElementById('modalTitle');
-const modalUrl    = document.getElementById('modalUrl');
-const modalFrame  = document.getElementById('modalFrame');
-const modalHint   = document.getElementById('modalHint');
-const btnReload   = document.getElementById('btnReload');
-const btnNewTab   = document.getElementById('btnNewTab');
-const btnClose    = document.getElementById('btnClose');
-const fabWrap     = document.getElementById('fabWrap');
-const fabBtn      = document.getElementById('fabBtn');
-const fabList     = document.getElementById('fabList');
-const grid        = document.getElementById('grid');
+const modal      = document.getElementById('modal');
+const modalTitle = document.getElementById('modalTitle');
+const modalUrl   = document.getElementById('modalUrl');
+const modalFrame = document.getElementById('modalFrame');
+const frameState = document.getElementById('frameState');
+const statusDot  = document.getElementById('statusDot');
+const btnReload  = document.getElementById('btnReload');
+const btnWindow  = document.getElementById('btnWindow');
+const btnClose   = document.getElementById('btnClose');
+const fabWrap    = document.getElementById('fabWrap');
+const fabBtn     = document.getElementById('fabBtn');
+const fabList    = document.getElementById('fabList');
+const grid       = document.getElementById('grid');
 
-/* ================== ABRIR EN MODAL ================== */
-function abrirEnModal(item){
-  modalTitle.textContent = item.titulo;
-  modalUrl.textContent   = item.url.replace('https://','');
-  btnNewTab.href         = item.url;
-  modalFrame.src         = item.url;
-  modal.classList.add('open');
-  cerrarFab();
-  mostrarToast(`Cargando: ${item.titulo}`);
+let accesoActual = null;
+let chequeoTimer = null;
+let loadFiredAt  = 0;
 
-  // Mostrar aviso por si el sitio bloquea el iframe
-  modalHint.classList.add('show');
-  clearTimeout(modalHint._t);
-  modalHint._t = setTimeout(()=> modalHint.classList.remove('show'), 6000);
+/* ================== ESTADOS DEL IFRAME ================== */
+function setEstado(estado, { titulo, mensaje, acciones } = {}){
+  frameState.classList.remove('hide');
+  frameState.innerHTML = '';
+
+  if (estado === 'cargando'){
+    statusDot.className = 'dot-live';
+    frameState.innerHTML = `
+      <div class="spinner"></div>
+      <h2>Cargando módulo…</h2>
+      <p>${mensaje || 'Verificando si el sitio permite incrustarse.'}</p>
+    `;
+    return;
+  }
+
+  if (estado === 'ok'){
+    // Ocultamos la capa cuando el iframe ya cargó bien
+    frameState.classList.add('hide');
+    statusDot.className = 'dot-live';
+    return;
+  }
+
+  if (estado === 'bloqueado'){
+    statusDot.className = 'dot-live err';
+    frameState.innerHTML = `
+      <div class="ico-warn">🚫</div>
+      <h2>${titulo || 'El sitio bloqueó la carga en iframe'}</h2>
+      <p>${mensaje || 'FoodBot aplica <b>X-Frame-Options</b> o <b>CSP frame-ancestors</b>, lo que impide mostrarlo embebido. Como el navegador no envía las cookies de sesión en este contexto, además pedirá iniciar sesión.'}</p>
+      <div class="actions">
+        <button class="mbtn primary" id="fbOpenWindow">🪟 Abrir en ventana flotante</button>
+        <button class="mbtn" id="fbRetry">↻ Reintentar</button>
+      </div>
+    `;
+    document.getElementById('fbOpenWindow').onclick = abrirEnVentana;
+    document.getElementById('fbRetry').onclick = ()=> abrirEnModal(accesoActual, true);
+    return;
+  }
+
+  if (estado === 'sesion'){
+    statusDot.className = 'dot-live warn';
+    frameState.innerHTML = `
+      <div class="ico-warn">🔐</div>
+      <h2>${titulo || 'El sitio pide iniciar sesión'}</h2>
+      <p>${mensaje || 'La página cargó dentro del iframe pero el navegador <b>no envió las cookies de sesión</b> (política SameSite del navegador). Es una restricción del navegador, no del panel.'}</p>
+      <div class="actions">
+        <button class="mbtn primary" id="fbOpenWindow">🪟 Abrir en ventana (con sesión)</button>
+        <button class="mbtn" id="fbRetry">↻ Reintentar</button>
+      </div>
+    `;
+    document.getElementById('fbOpenWindow').onclick = abrirEnVentana;
+    document.getElementById('fbRetry').onclick = ()=> abrirEnModal(accesoActual, true);
+    return;
+  }
 }
 
-function cerrarModal(){
-  modal.classList.remove('open');
-  // Limpiar iframe para detener carga y liberar recursos
-  setTimeout(()=>{ if(!modal.classList.contains('open')) modalFrame.src = 'about:blank'; }, 250);
+/* ================== ABRIR EN MODAL ================== */
+function abrirEnModal(item, forzar){
+  if (!item) return;
+  accesoActual = item;
+
+  modalTitle.textContent = item.titulo;
+  modalUrl.textContent   = item.url.replace('https://','');
+  modal.classList.add('open');
+  cerrarFab();
+
+  setEstado('cargando');
+
+  // Truco clave: cuando venimos de un error previo, reseteamos el src
+  // con un doble tick para forzar una recarga real.
+  loadFiredAt = 0;
+  const src = item.url + (forzar ? (item.url.includes('?') ? '&' : '?') + '_r=' + Date.now() : '');
+  modalFrame.src = 'about:blank';
+  setTimeout(()=>{ modalFrame.src = src; }, 40);
+
+  iniciarChequeo();
+}
+
+/* ================== DETECCIÓN DE BLOQUEO / LOGIN ================== */
+modalFrame.addEventListener('load', () => {
+  loadFiredAt = Date.now();
+
+  // Primer load después de about:blank: ignorar
+  if (modalFrame.src === 'about:blank') return;
+
+  // Estrategia: intentar leer el documento.
+  // - Si lanza error de cross-origin → el iframe cargó contenido real de otro dominio → probablemente OK.
+  // - Si podemos leer y vemos login → aviso de sesión.
+  // - Si podemos leer y está casi vacío → probablemente bloqueo.
+  setTimeout(()=>{
+    let doc = null;
+    try { doc = modalFrame.contentDocument; } catch { doc = null; }
+
+    if (doc === null){
+      // Cross-origin → parece que sí cargó algo real, asumimos OK y ocultamos capa.
+      // No podemos verificar más sin acceso, así que dejamos pasar.
+      setEstado('ok');
+      return;
+    }
+
+    const txt = (doc.body?.innerText || '').toLowerCase();
+    const html = (doc.documentElement?.outerHTML || '').toLowerCase();
+
+    // Señales de bloqueo por X-Frame-Options / CSP
+    const bloqueo =
+      txt.includes('refused to connect') ||
+      txt.includes('x-frame-options') ||
+      txt.includes('frame-ancestors') ||
+      html.includes('refused to connect');
+
+    // Señales de pantalla de login
+    const login =
+      (txt.includes('iniciar sesión') || txt.includes('log in') || txt.includes('sign in') || txt.includes('login'))
+      && txt.length < 2000;
+
+    if (bloqueo){ setEstado('bloqueado'); return; }
+    if (login)  { setEstado('sesion');     return; }
+
+    // Si el body está prácticamente vacío tras 1.5s → asumimos bloqueo silencioso
+    if (txt.trim().length < 5){
+      setEstado('bloqueado');
+      return;
+    }
+
+    setEstado('ok');
+  }, 800);
+});
+
+function iniciarChequeo(){
+  clearTimeout(chequeoTimer);
+  // Si en 6 segundos no ha cargado nada útil → sospecha
+  chequeoTimer = setTimeout(()=>{
+    if (!modal.classList.contains('open')) return;
+    if (!loadFiredAt){
+      setEstado('bloqueado', {
+        titulo:'La carga está tardando demasiado',
+        mensaje:'El sitio no respondió dentro del iframe. Puede estar bloqueando la incrustación o requerir sesión activa.'
+      });
+    }
+  }, 6000);
+}
+
+/* ================== FALLBACK: VENTANA FLOTANTE ================== */
+function abrirEnVentana(){
+  if (!accesoActual) return;
+
+  // Calculamos tamaño/posición para que se sienta como "el modal" del panel.
+  const w = Math.min(1200, Math.round(window.outerWidth  * 0.86));
+  const h = Math.min(860,  Math.round(window.outerHeight * 0.88));
+  const left = Math.round((window.screenX || 0) + (window.outerWidth  - w) / 2);
+  const top  = Math.round((window.screenY || 0) + (window.outerHeight - h) / 2);
+
+  const feats = [
+    `width=${w}`, `height=${h}`,
+    `left=${left}`, `top=${top}`,
+    'resizable=yes','scrollbars=yes',
+    'menubar=no','toolbar=no','location=yes','status=no'
+  ].join(',');
+
+  const win = window.open(accesoActual.url, 'fb_win_' + Date.now(), feats);
+  if (!win){
+    alert('El navegador bloqueó la ventana emergente.\nPermite pop-ups para este sitio y reintenta.');
+    return;
+  }
+  win.focus();
+  mostrarToast('Abierto en ventana (con tu sesión intacta)');
 }
 
 /* ================== RENDER GRID ================== */
 ACCESOS.forEach(item => {
-  const a = document.createElement('a');
-  a.className  = 'card';
-  a.href       = item.url;          // Permite clic derecho → abrir en nueva pestaña
-  a.target     = '_blank';
-  a.rel        = 'noopener noreferrer';
-  a.innerHTML  = `
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'card';
+  card.innerHTML = `
     <div class="icon">${item.icono}</div>
     <h3>${item.titulo}</h3>
     <small>${item.url.replace('https://','')}</small>
   `;
-  a.addEventListener('click', (e)=>{
-    // Solo interceptamos clic izquierdo normal
-    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    abrirEnModal(item);
-  });
-  grid.appendChild(a);
+  card.addEventListener('click', ()=> abrirEnModal(item));
+  grid.appendChild(card);
 });
 
-/* ================== RENDER LISTA FLOTANTE ================== */
+/* ================== RENDER FAB ================== */
 ACCESOS.forEach(item => {
   const b = document.createElement('button');
   b.type = 'button';
@@ -360,14 +504,9 @@ ACCESOS.forEach(item => {
   fabList.appendChild(b);
 });
 
-/* ================== BOTÓN FLOTANTE ================== */
-fabBtn.addEventListener('click', (e)=>{
-  e.stopPropagation();
-  fabWrap.classList.toggle('open');
-});
-document.addEventListener('click', (e)=>{
-  if (!fabWrap.contains(e.target)) cerrarFab();
-});
+/* ================== FAB TOGGLE ================== */
+fabBtn.addEventListener('click', (e)=>{ e.stopPropagation(); fabWrap.classList.toggle('open'); });
+document.addEventListener('click', (e)=>{ if (!fabWrap.contains(e.target)) cerrarFab(); });
 document.addEventListener('keydown', (e)=>{
   if (e.key === 'Escape'){
     if (fabWrap.classList.contains('open')) cerrarFab();
@@ -379,17 +518,21 @@ function cerrarFab(){ fabWrap.classList.remove('open'); }
 /* ================== CONTROLES DEL MODAL ================== */
 btnClose.addEventListener('click', cerrarModal);
 btnReload.addEventListener('click', ()=>{
-  if (!modalFrame.src) return;
-  const src = modalFrame.src;
-  modalFrame.src = 'about:blank';
-  setTimeout(()=>{ modalFrame.src = src; }, 60);
-  mostrarToast('Recargando página…');
+  if (!accesoActual) return;
+  abrirEnModal(accesoActual, true);
+  mostrarToast('Recargando…');
 });
+btnWindow.addEventListener('click', abrirEnVentana);
 
-/* Cerrar modal al hacer clic en el fondo (fuera del shell) */
-modal.addEventListener('click', (e)=>{
-  if (e.target === modal) cerrarModal();
-});
+modal.addEventListener('click', (e)=>{ if (e.target === modal) cerrarModal(); });
+
+function cerrarModal(){
+  modal.classList.remove('open');
+  clearTimeout(chequeoTimer);
+  setTimeout(()=>{
+    if (!modal.classList.contains('open')) modalFrame.src = 'about:blank';
+  }, 250);
+}
 
 /* ================== TOAST ================== */
 let toastTimer;

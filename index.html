@@ -23,14 +23,10 @@
     background:radial-gradient(1200px 600px at 20% -10%,#1d2634 0%,var(--bg) 60%);
     color:var(--txt);
     min-height:100vh;
+    padding:32px 24px 120px;
   }
-
-  /* ============ MODO COMPLETO (dashboard) ============ */
-  body.mode-full{padding:32px 24px}
-  body.mode-full #launcherView{display:none}
-
-  header.main{
-    max-width:1100px;margin:0 auto 22px;
+  header{
+    max-width:1100px;margin:0 auto 28px;
     display:flex;align-items:center;gap:14px;flex-wrap:wrap;
   }
   .logo{
@@ -39,32 +35,9 @@
     display:flex;align-items:center;justify-content:center;
     font-weight:800;font-size:20px;color:#0b1017;
     box-shadow:0 6px 18px rgba(34,197,94,.35);
-    flex:0 0 auto;
   }
-  header.main h1{font-size:22px;margin:0;letter-spacing:.3px}
-  header.main p{margin:2px 0 0;color:var(--muted);font-size:13px}
-
-  .top-actions{
-    max-width:1100px;margin:0 auto 22px;
-    display:flex;gap:10px;flex-wrap:wrap;
-  }
-  .btn{
-    border:1px solid var(--line);
-    background:#161b24;color:var(--txt);
-    padding:10px 16px;border-radius:11px;
-    font-size:13.5px;font-weight:600;cursor:pointer;
-    display:inline-flex;align-items:center;gap:8px;
-    transition:background .15s ease,border-color .15s ease,transform .15s ease;
-    font-family:inherit;
-  }
-  .btn:hover{background:#1f2734;border-color:#3a475c}
-  .btn:active{transform:scale(.97)}
-  .btn.primary{
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:#08130c;border:none;
-    box-shadow:0 6px 18px rgba(34,197,94,.35);
-  }
-  .btn.primary:hover{filter:brightness(1.08)}
+  header h1{font-size:22px;margin:0;letter-spacing:.3px}
+  header p{margin:2px 0 0;color:var(--muted);font-size:13px}
 
   .grid{
     max-width:1100px;margin:0 auto;
@@ -81,7 +54,6 @@
     transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
     text-decoration:none;color:inherit;
     position:relative;overflow:hidden;
-    font-family:inherit;text-align:left;
   }
   .card::after{
     content:"";position:absolute;inset:0;
@@ -100,69 +72,157 @@
   .card h3{margin:0;font-size:15px;line-height:1.3}
   .card small{color:var(--muted);font-size:12px;word-break:break-all}
 
-  /* ============ MODO LANZADOR (ventana pequeña) ============ */
-  body.mode-launcher{
-    padding:0;
-    background:#0d1117;
-    overflow:hidden;
+  /* ============ BOTÓN FLOTANTE ============ */
+  .fab-wrap{
+    position:fixed;right:24px;bottom:24px;z-index:99999;
+    display:flex;flex-direction:column;align-items:flex-end;gap:12px;
   }
-  body.mode-launcher #fullView{display:none}
+  .fab-menu{
+    display:flex;flex-direction:column;gap:8px;
+    max-height:0;opacity:0;pointer-events:none;
+    transform:translateY(12px) scale(.96);
+    transform-origin:bottom right;
+    transition:all .28s cubic-bezier(.22,1,.36,1);
+    width:280px;
+  }
+  .fab-wrap.open .fab-menu{
+    max-height:70vh;opacity:1;pointer-events:auto;transform:translateY(0) scale(1);
+  }
+  .fab-menu-scroll{
+    background:rgba(22,27,36,.97);
+    backdrop-filter:blur(14px);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:8px;
+    box-shadow:var(--shadow);
+    max-height:60vh;overflow-y:auto;
+  }
+  .fab-menu-scroll::-webkit-scrollbar{width:8px}
+  .fab-menu-scroll::-webkit-scrollbar-thumb{background:#33405500;border-radius:8px}
+  .fab-menu-scroll:hover::-webkit-scrollbar-thumb{background:#334055}
+  .fab-item{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;border-radius:10px;
+    color:var(--txt);text-decoration:none;font-size:13.5px;
+    transition:background .15s ease;cursor:pointer;
+    border:none;background:transparent;width:100%;text-align:left;
+    font-family:inherit;
+  }
+  .fab-item:hover{background:#232b39}
+  .fab-item .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--accent);flex:0 0 auto;
+    box-shadow:0 0 8px rgba(34,197,94,.8);
+  }
+  .fab-btn{
+    width:60px;height:60px;border-radius:50%;
+    border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#08130c;font-size:26px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 26px rgba(34,197,94,.45);
+    transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+  }
+  .fab-btn:hover{transform:scale(1.06)}
+  .fab-btn:active{transform:scale(.94)}
+  .fab-wrap.open .fab-btn{
+    transform:rotate(135deg);
+    background:linear-gradient(135deg,#ef4444,#b91c1c);
+    box-shadow:0 10px 26px rgba(239,68,68,.45);
+    color:#fff;
+  }
+  .fab-title{
+    font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--muted);padding:8px 12px 4px;font-weight:700;
+  }
 
-  #launcherView{
-    height:100vh;display:flex;flex-direction:column;
-    background:#0d1117;
+  /* ============ MODAL CON IFRAME ============ */
+  .modal{
+    position:fixed;inset:0;z-index:9998;
+    display:none;
+    background:rgba(7,10,15,.75);
+    backdrop-filter:blur(6px);
+    padding:24px;
   }
-  .launcher-header{
+  .modal.open{display:flex}
+  .modal-shell{
+    flex:1;
+    background:#0f141c;
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:var(--shadow);
+    max-width:100%;
+  }
+  .modal-bar{
     display:flex;align-items:center;gap:10px;
     padding:12px 14px;
-    background:linear-gradient(180deg,#161b24,#12161d);
+    background:#161b24;
     border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .modal-bar .dot-live{
+    width:9px;height:9px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 10px rgba(34,197,94,.9);
     flex:0 0 auto;
-    cursor:move;
-    user-select:none;
   }
-  .launcher-header .logo{width:34px;height:34px;border-radius:9px;font-size:14px}
-  .launcher-header .ttl{font-size:13px;font-weight:700;line-height:1.1}
-  .launcher-header .sub{font-size:11px;color:var(--muted);margin-top:2px}
-
-  .launcher-list{
-    flex:1;overflow-y:auto;
-    padding:8px;
-    display:flex;flex-direction:column;gap:4px;
+  .modal-title{
+    font-size:14px;font-weight:600;
+    flex:1;min-width:120px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
-  .launcher-list::-webkit-scrollbar{width:8px}
-  .launcher-list::-webkit-scrollbar-thumb{background:#334055;border-radius:8px}
-
-  .launcher-item{
-    display:flex;align-items:center;gap:10px;
-    padding:10px 10px;
-    border:1px solid transparent;
-    background:transparent;
-    color:var(--txt);
-    border-radius:10px;
-    font-family:inherit;font-size:13px;font-weight:500;
-    text-align:left;cursor:pointer;
-    transition:background .12s ease,border-color .12s ease,transform .12s ease;
-    width:100%;
-  }
-  .launcher-item:hover{background:#1c222d;border-color:var(--line)}
-  .launcher-item:active{transform:scale(.98)}
-  .launcher-item .ico{
-    width:28px;height:28px;flex:0 0 auto;
-    display:flex;align-items:center;justify-content:center;
+  .modal-url{
+    font-size:11.5px;color:var(--muted);
     background:#0e141d;border:1px solid var(--line);
-    border-radius:8px;font-size:14px;
+    padding:5px 10px;border-radius:8px;
+    max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
-  .launcher-item .ttl{flex:1;line-height:1.25}
+  .mbtn{
+    border:1px solid var(--line);
+    background:#0e141d;color:var(--txt);
+    padding:8px 12px;border-radius:9px;
+    font-size:12.5px;font-weight:600;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;
+    transition:background .15s ease,border-color .15s ease,transform .15s ease;
+    text-decoration:none;
+    font-family:inherit;
+  }
+  .mbtn:hover{background:#1f2734;border-color:#3a475c}
+  .mbtn:active{transform:scale(.97)}
+  .mbtn.danger:hover{background:#3a1212;border-color:#7f1d1d;color:#fecaca}
+  .mbtn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#08130c;border:none}
+  .mbtn.primary:hover{filter:brightness(1.08)}
+  .modal-body{flex:1;position:relative;background:#fff}
+  .modal-body iframe{
+    width:100%;height:100%;border:0;display:block;
+  }
+  .modal-hint{
+    position:absolute;left:50%;bottom:16px;transform:translateX(-50%);
+    background:rgba(15,20,28,.92);
+    border:1px solid var(--line);
+    color:var(--muted);
+    padding:8px 14px;border-radius:10px;
+    font-size:12px;
+    display:flex;align-items:center;gap:8px;
+    pointer-events:none;
+    opacity:0;transition:opacity .3s ease;
+    z-index:5;
+  }
+  .modal-hint.show{opacity:1}
+  .modal-hint b{color:var(--txt)}
 
-  .launcher-footer{
-    flex:0 0 auto;
-    padding:8px;
-    border-top:1px solid var(--line);
-    background:#0f141c;
-    display:flex;gap:8px;
+  @media (max-width:720px){
+    .modal{padding:8px}
+    .modal-url{display:none}
+    .mbtn span.lbl{display:none}
   }
-  .launcher-footer .btn{flex:1;justify-content:center;font-size:12px;padding:8px 10px}
+  @media (max-width:520px){
+    body{padding:20px 14px 140px}
+    .fab-wrap{right:16px;bottom:16px}
+    .fab-menu{width:calc(100vw - 32px)}
+  }
 
   /* Toast */
   .toast{
@@ -173,226 +233,168 @@
     box-shadow:var(--shadow);
   }
   .toast.show{opacity:1;transform:translate(-50%,0)}
-
-  @media (max-width:520px){
-    body.mode-full{padding:20px 14px}
-  }
 </style>
 </head>
 <body>
 
-<!-- ================================================== -->
-<!-- ============ VISTA COMPLETA (DASHBOARD) =========== -->
-<!-- ================================================== -->
-<div id="fullView">
-  <header class="main">
-    <div class="logo">FB</div>
-    <div>
-      <h1>Panel de Accesos · FoodBot Admin</h1>
-      <p>Los accesos se abren en <b>nueva pestaña real</b> para conservar tu sesión iniciada. Usa el lanzador flotante para tenerlos siempre a la mano.</p>
-    </div>
-  </header>
-
-  <div class="top-actions">
-    <button class="btn primary" id="btnOpenLauncher">
-      📌 Abrir lanzador flotante
-    </button>
-    <button class="btn" id="btnOpenAll" title="Abre cada acceso en su propia pestaña">
-      🚀 Abrir todos en pestañas
-    </button>
-    <button class="btn" id="btnCopyList" title="Copia la lista completa de URLs">
-      📋 Copiar lista de URLs
-    </button>
+<header>
+  <div class="logo">FB</div>
+  <div>
+    <h1>Panel de Accesos · FoodBot Admin</h1>
+    <p>Haz clic en cualquier tarjeta o en el botón flotante. Las páginas se abren aquí mismo sin perder el control.</p>
   </div>
+</header>
 
-  <main class="grid" id="grid"></main>
+<main class="grid" id="grid"></main>
+
+<!-- ============ MODAL CON IFRAME ============ -->
+<div class="modal" id="modal">
+  <div class="modal-shell">
+    <div class="modal-bar">
+      <span class="dot-live"></span>
+      <span class="modal-title" id="modalTitle">—</span>
+      <span class="modal-url" id="modalUrl">—</span>
+      <button class="mbtn" id="btnReload" title="Recargar">↻ <span class="lbl">Recargar</span></button>
+      <a class="mbtn primary" id="btnNewTab" href="#" target="_blank" rel="noopener noreferrer" title="Abrir en nueva pestaña">↗ <span class="lbl">Nueva pestaña</span></a>
+      <button class="mbtn danger" id="btnClose" title="Cerrar">✕ <span class="lbl">Cerrar</span></button>
+    </div>
+    <div class="modal-body">
+      <iframe id="modalFrame" referrerpolicy="no-referrer"></iframe>
+      <div class="modal-hint" id="modalHint">Si la página aparece en blanco, usa <b>Nueva pestaña</b></div>
+    </div>
+  </div>
 </div>
 
-<!-- ================================================== -->
-<!-- ============ VISTA LANZADOR (VENTANA) ============= -->
-<!-- ================================================== -->
-<div id="launcherView">
-  <div class="launcher-header">
-    <div class="logo">FB</div>
-    <div style="flex:1">
-      <div class="ttl">Accesos FoodBot</div>
-      <div class="sub">Clic → nueva pestaña · Sesión conservada</div>
+<!-- ============ BOTÓN FLOTANTE ============ -->
+<div class="fab-wrap" id="fabWrap">
+  <div class="fab-menu" id="fabMenu">
+    <div class="fab-menu-scroll">
+      <div class="fab-title">Accesos rápidos</div>
+      <div id="fabList"></div>
     </div>
   </div>
-  <div class="launcher-list" id="launcherList"></div>
-  <div class="launcher-footer">
-    <button class="btn" id="btnOpenDashboard">🖥 Panel completo</button>
-    <button class="btn" id="btnCloseLauncher">✕ Cerrar</button>
-  </div>
+  <button class="fab-btn" id="fabBtn" title="Accesos rápidos">+</button>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* ================================================================
-   CONFIGURACIÓN DE ACCESOS
-   ================================================================ */
+/* ================== CONFIGURACIÓN DE ACCESOS ================== */
 const ACCESOS = [
-  { titulo:"Fullfil a requisición",                     url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"📦" },
-  { titulo:"Validar auditorías pendientes",             url:"https://admin.foodbot.ai/inventory/audit?tab=pending",      icono:"✅" },
-  { titulo:"Calendario de requisiciones y compras",     url:"https://admin.foodbot.ai/inventory/po-calendar",            icono:"📅" },
-  { titulo:"Configuración y creación de productos",     url:"https://admin.foodbot.ai/menu/product",                     icono:"🍔" },
-  { titulo:"Configuración y creación de usuarios",      url:"https://admin.foodbot.ai/restaurant_details/manage_users",  icono:"👥" },
-  { titulo:"Configuración y creación de menús visibles",url:"https://admin.foodbot.ai/menu?tab=menu",                    icono:"📋" },
-  { titulo:"Disponibilidad de productos en ubicaciones",url:"https://admin.foodbot.ai/menu/menu-availability",           icono:"📍" },
-  { titulo:"Recetas",                                   url:"https://admin.foodbot.ai/inventory/recipes",                icono:"📖" },
-  { titulo:"Modificadores",                             url:"https://admin.foodbot.ai/menu/modifierCategory",            icono:"🧩" },
-  { titulo:"Órdenes de traslado y compras",             url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"🔄" },
+  { titulo:"Fullfil a requisición",                    url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"📦" },
+  { titulo:"Validar auditorías pendientes",            url:"https://admin.foodbot.ai/inventory/audit?tab=pending",      icono:"✅" },
+  { titulo:"Calendario de requisiciones y compras",    url:"https://admin.foodbot.ai/inventory/po-calendar",            icono:"📅" },
+  { titulo:"Configuración y creación de productos",    url:"https://admin.foodbot.ai/menu/product",                     icono:"🍔" },
+  { titulo:"Configuración y creación de usuarios",     url:"https://admin.foodbot.ai/restaurant_details/manage_users",  icono:"👥" },
+  { titulo:"Configuración y creación de menús visibles",url:"https://admin.foodbot.ai/menu?tab=menu",                   icono:"📋" },
+  { titulo:"Disponibilidad de productos en ubicaciones",url:"https://admin.foodbot.ai/menu/menu-availability",          icono:"📍" },
+  { titulo:"Recetas",                                  url:"https://admin.foodbot.ai/inventory/recipes",                icono:"📖" },
+  { titulo:"Modificadores",                            url:"https://admin.foodbot.ai/menu/modifierCategory",            icono:"🧩" },
+  { titulo:"Órdenes de traslado y compras",            url:"https://admin.foodbot.ai/inventory/supplier-po",            icono:"🔄" },
 ];
 
-const LAUNCHER_NAME = 'fb_launcher_window';
-const esModoLanzador = location.hash === '#launcher';
+/* ================== REFERENCIAS ================== */
+const modal       = document.getElementById('modal');
+const modalTitle  = document.getElementById('modalTitle');
+const modalUrl    = document.getElementById('modalUrl');
+const modalFrame  = document.getElementById('modalFrame');
+const modalHint   = document.getElementById('modalHint');
+const btnReload   = document.getElementById('btnReload');
+const btnNewTab   = document.getElementById('btnNewTab');
+const btnClose    = document.getElementById('btnClose');
+const fabWrap     = document.getElementById('fabWrap');
+const fabBtn      = document.getElementById('fabBtn');
+const fabList     = document.getElementById('fabList');
+const grid        = document.getElementById('grid');
 
-/* ================================================================
-   ABRIR ENLACE
-   Se usa window.open con '_blank' para que el navegador lo trate
-   como navegación de PRIMER NIVEL → las cookies de sesión viajan
-   correctamente y NO pide iniciar sesión de nuevo.
-   ================================================================ */
-function abrirAcceso(item){
-  const w = window.open(item.url, '_blank', 'noopener');
-  if (!w) {
-    mostrarToast('Permite ventanas emergentes para abrir el acceso');
-  } else {
-    mostrarToast(`Abriendo: ${item.titulo}`);
-  }
+/* ================== ABRIR EN MODAL ================== */
+function abrirEnModal(item){
+  modalTitle.textContent = item.titulo;
+  modalUrl.textContent   = item.url.replace('https://','');
+  btnNewTab.href         = item.url;
+  modalFrame.src         = item.url;
+  modal.classList.add('open');
+  cerrarFab();
+  mostrarToast(`Cargando: ${item.titulo}`);
+
+  // Mostrar aviso por si el sitio bloquea el iframe
+  modalHint.classList.add('show');
+  clearTimeout(modalHint._t);
+  modalHint._t = setTimeout(()=> modalHint.classList.remove('show'), 6000);
 }
 
-/* ================================================================
-   MODO COMPLETO — Dashboard
-   ================================================================ */
-function renderDashboard(){
-  const grid = document.getElementById('grid');
-  ACCESOS.forEach(item => {
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.className = 'card';
-    card.innerHTML = `
-      <div class="icon">${item.icono}</div>
-      <h3>${item.titulo}</h3>
-      <small>${item.url.replace('https://','')}</small>
-    `;
-    card.addEventListener('click', ()=> abrirAcceso(item));
-    // Clic derecho → menú nativo con "abrir en nueva pestaña"
-    card.addEventListener('contextmenu', (e)=>{
-      // Dejamos que el navegador muestre su menú por defecto (no hacemos nada)
-    });
-    grid.appendChild(card);
-  });
+function cerrarModal(){
+  modal.classList.remove('open');
+  // Limpiar iframe para detener carga y liberar recursos
+  setTimeout(()=>{ if(!modal.classList.contains('open')) modalFrame.src = 'about:blank'; }, 250);
 }
 
-document.getElementById('btnOpenLauncher').addEventListener('click', abrirLanzador);
-
-document.getElementById('btnOpenAll').addEventListener('click', ()=>{
-  ACCESOS.forEach((item, i)=>{
-    setTimeout(()=> window.open(item.url, '_blank', 'noopener'), i * 220);
+/* ================== RENDER GRID ================== */
+ACCESOS.forEach(item => {
+  const a = document.createElement('a');
+  a.className  = 'card';
+  a.href       = item.url;          // Permite clic derecho → abrir en nueva pestaña
+  a.target     = '_blank';
+  a.rel        = 'noopener noreferrer';
+  a.innerHTML  = `
+    <div class="icon">${item.icono}</div>
+    <h3>${item.titulo}</h3>
+    <small>${item.url.replace('https://','')}</small>
+  `;
+  a.addEventListener('click', (e)=>{
+    // Solo interceptamos clic izquierdo normal
+    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    abrirEnModal(item);
   });
-  mostrarToast('Abriendo todos los accesos…');
+  grid.appendChild(a);
 });
 
-document.getElementById('btnCopyList').addEventListener('click', async ()=>{
-  const txt = ACCESOS.map(a => `${a.titulo}\n${a.url}`).join('\n\n');
-  try {
-    await navigator.clipboard.writeText(txt);
-    mostrarToast('Lista copiada al portapapeles');
-  } catch {
-    mostrarToast('No se pudo copiar automáticamente');
-  }
+/* ================== RENDER LISTA FLOTANTE ================== */
+ACCESOS.forEach(item => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'fab-item';
+  b.innerHTML = `<span class="dot"></span><span>${item.icono} ${item.titulo}</span>`;
+  b.addEventListener('click', ()=> abrirEnModal(item));
+  fabList.appendChild(b);
 });
 
-/* ================================================================
-   MODO LANZADOR — Ventana flotante pequeña
-   ================================================================ */
-function renderLauncher(){
-  const list = document.getElementById('launcherList');
-  ACCESOS.forEach(item => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'launcher-item';
-    b.innerHTML = `
-      <span class="ico">${item.icono}</span>
-      <span class="ttl">${item.titulo}</span>
-    `;
-    b.addEventListener('click', ()=> abrirAcceso(item));
-    list.appendChild(b);
-  });
-
-  document.getElementById('btnCloseLauncher').addEventListener('click', ()=> window.close());
-
-  document.getElementById('btnOpenDashboard').addEventListener('click', ()=>{
-    const base = location.href.split('#')[0];
-    window.open(base, '_blank', 'noopener');
-  });
-}
-
-/* ================================================================
-   ABRIR LANZADOR (ventana pequeña flotante en pantalla)
-   ================================================================ */
-function abrirLanzador(){
-  // Si ya existe y sigue abierta → enfocar
-  const existente = window.open('', LAUNCHER_NAME);
-  if (existente && !existente.closed) {
-    try { existente.focus(); } catch(e){}
-    // Si está abierta pero en otra URL, la recargamos al hash correcto
-    try {
-      if (!existente.location.href.includes('#launcher')) {
-        existente.location.href = location.pathname + '#launcher';
-      }
-    } catch(e){}
-    return;
+/* ================== BOTÓN FLOTANTE ================== */
+fabBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  fabWrap.classList.toggle('open');
+});
+document.addEventListener('click', (e)=>{
+  if (!fabWrap.contains(e.target)) cerrarFab();
+});
+document.addEventListener('keydown', (e)=>{
+  if (e.key === 'Escape'){
+    if (fabWrap.classList.contains('open')) cerrarFab();
+    else if (modal.classList.contains('open')) cerrarModal();
   }
+});
+function cerrarFab(){ fabWrap.classList.remove('open'); }
 
-  // Calcular posición: pegado al borde derecho
-  const w = 380;
-  const h = Math.min(720, Math.max(480, screen.availHeight - 120));
-  const left = Math.max(0, (screen.availWidth || 1280) - w - 24);
-  const top  = 60;
+/* ================== CONTROLES DEL MODAL ================== */
+btnClose.addEventListener('click', cerrarModal);
+btnReload.addEventListener('click', ()=>{
+  if (!modalFrame.src) return;
+  const src = modalFrame.src;
+  modalFrame.src = 'about:blank';
+  setTimeout(()=>{ modalFrame.src = src; }, 60);
+  mostrarToast('Recargando página…');
+});
 
-  const url = location.pathname + '#launcher';
-  const features = [
-    `width=${w}`,
-    `height=${h}`,
-    `left=${left}`,
-    `top=${top}`,
-    'resizable=yes',
-    'scrollbars=yes',
-    'menubar=no',
-    'toolbar=no',
-    'location=no',
-    'status=no'
-  ].join(',');
+/* Cerrar modal al hacer clic en el fondo (fuera del shell) */
+modal.addEventListener('click', (e)=>{
+  if (e.target === modal) cerrarModal();
+});
 
-  const win = window.open(url, LAUNCHER_NAME, features);
-  if (!win) {
-    alert('El navegador bloqueó la ventana emergente.\n\nPermite las ventanas emergentes para este sitio y vuelve a intentarlo.');
-  } else {
-    win.focus();
-  }
-}
-
-/* ================================================================
-   BOOTSTRAP — Elegir qué vista renderizar según el hash
-   ================================================================ */
-if (esModoLanzador){
-  document.body.classList.add('mode-launcher');
-  renderLauncher();
-} else {
-  document.body.classList.add('mode-full');
-  renderDashboard();
-}
-
-/* ================================================================
-   TOAST
-   ================================================================ */
+/* ================== TOAST ================== */
 let toastTimer;
 function mostrarToast(msg){
   const t = document.getElementById('toast');
-  if (!t) return;
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
